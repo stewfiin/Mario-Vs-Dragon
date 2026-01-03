@@ -5,42 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+
         @keyframes k-kanan {
             0% { transform: translateX(0); opacity: 1; } 
             90% { opacity: 1; }
             100% { transform: translateX(calc(100vw - 150px)); opacity: 0; }
         }
-        .animate-kanan {
+        .gerak-api {
             animation: k-kanan 3s linear infinite;
         }
 
+        @keyframes putar-api {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); } 
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        .efek-bakar {
+            animation: putar-api 0.5s linear infinite; 
+        }
         @keyframes mario {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-200px); }
         }
-        .animate-mario {
-            animation: mario 1s ease-in-out infinite;
-        }
+        .animate-mario { animation: mario 1s ease-in-out infinite; }
 
         @keyframes naga {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-100px); }
         }
-        .animate-naga {
-            animation: naga 1s ease-in-out infinite;
-            animation-delay: 0.5s;
+        .animate-naga { animation: naga 1s ease-in-out infinite; animation-delay: 0.5s; }
+
+        @keyframes naga-kalah {
+            0%, 96% { opacity: 1; transform: scale(1) rotate(0deg); filter: grayscale(0%); }
+            100% { opacity: 0; transform: scale(0) rotate(360deg); filter: grayscale(100%); }
         }
+        .animasi-kematian-naga { animation: naga-kalah 12s ease-in infinite; animation-delay: 0.5s; }
 
         @keyframes kurangi-hp {
-            0%, 24%  { width: 100%; } 
-            25%, 49% { width: 75%; }  
-            50%, 74% { width: 50%; }  
-            75%, 99% { width: 25%; }  
-            100%     { width: 0%; }  
+            0%, 24% { width: 100%; } 
+            25%, 49% { width: 75%; } 
+            50%, 74% { width: 50%; } 
+            75%, 99% { width: 25%; } 
+            100% { width: 0%; }
         }
+        .animate-hp-naga { animation: kurangi-hp 12s steps(1) infinite; }
 
-        .animate-hp-naga {
-            animation: kurangi-hp 12s steps(1) infinite;
+        @keyframes ubah-angka {
+            0%, 24% { content: "100%"; } 
+            25%, 49% { content: "75%"; } 
+            50%, 74% { content: "50%"; } 
+            75%, 99% { content: "25%"; } 
+            100% { content: "0%"; }
+        }
+        .angka-naga::after { content: "100%"; animation: ubah-angka 12s steps(1) infinite; }
+
+        @keyframes getar-kena-hit {
+            0%, 23%, 27%, 48%, 52%, 73%, 77%, 100% {
+                 transform: translate(0, 0) rotate(0deg); filter: brightness(1);
+            }
+
+            24.0% { transform: translate(-10px, 5px) rotate(-5deg); filter: brightness(1.5) sepia(1) saturate(5) hue-rotate(-50deg); } 
+            24.5% { transform: translate(10px, -5px) rotate(5deg); }
+            25.0% { transform: translate(-8px, 3px) rotate(-3deg); }
+            25.5% { transform: translate(8px, -3px) rotate(3deg); }
+            26.0% { transform: translate(0, 0) rotate(0deg); filter: brightness(1); }
+
+            49.0% { transform: translate(-10px, 5px) rotate(-5deg); filter: brightness(1.5) sepia(1) saturate(5) hue-rotate(-50deg); }
+            49.5% { transform: translate(10px, -5px) rotate(5deg); }
+            50.0% { transform: translate(-8px, 3px) rotate(-3deg); }
+            50.5% { transform: translate(8px, -3px) rotate(3deg); }
+            51.0% { transform: translate(0, 0) rotate(0deg); filter: brightness(1); }
+
+            74.0% { transform: translate(-10px, 5px) rotate(-5deg); filter: brightness(1.5) sepia(1) saturate(5) hue-rotate(-50deg); }
+            74.5% { transform: translate(10px, -5px) rotate(5deg); }
+            75.0% { transform: translate(-8px, 3px) rotate(-3deg); }
+            75.5% { transform: translate(8px, -3px) rotate(3deg); }
+            76.0% { transform: translate(0, 0) rotate(0deg); filter: brightness(1); }
+        }
+        .wrapper-getar-naga {
+            animation: getar-kena-hit 12s linear infinite;
+            animation-delay: 0.5s; 
+            transform-origin: bottom center;
+            display: flex; 
         }
     </style>
   </head>
@@ -48,27 +94,36 @@
 
     <div class="bg-[url('background.jpg')] bg-cover bg-bottom min-h-screen flex items-start justify-start p-10 overflow-hidden">  
         <div class="flex flex-col w-full h-full justify-between">        
-            <div>
-                <div>
-                    <h1 class="text-3xl font-bold underline text-white drop-shadow-md">Mario VS Dragon</h1>
-                    <p class="text-lg text-white drop-shadow-md">Epic Battle Animation</p>
-                </div> 
-                <div>
-                     <img class="animate-kanan w-20 h-20 mt-10" src="api.png" alt="Api">
+            <div class="w-full relative">
+                <div class="w-full text-center relative z-10">
+                    <h1 class="text-6xl text-red-600 font-bold uppercase tracking-widest text-red-600 outline-white drop-shadow-lg">
+                        Mario VS Dragon
+                    </h1>
+                    <p class="text-xl text-white font-bold uppercase tracking-wider mt-2 drop-shadow-md">
+                        Epic Battle Animation
+                    </p>
+                </div>  
+                <div class="gerak-api w-20 h-20 absolute left-0 top-32 z-0">
+                     <img class="efek-bakar w-full h-full" src="api.png" alt="Api">
                 </div>
             </div>
 
             <div class="flex justify-between items-end w-full mt-20">          
                 <div class="animate-mario flex flex-col items-center gap-2">
+                    <h2 class="relative text-white text-m font-bold drop-shadow-md">100%</h2>
                     <div class="w-40 h-6 bg-gray-800 border-2 border-black rounded-full overflow-hidden shadow-lg relative">
-                        <div class="h-full w-full bg-green-500"></div> </div>
+                        <div class="h-full w-full bg-green-500"></div> </div>   
                     <img class=" w-40 h-40" src="mario.png" alt="Mario">
                 </div>           
+                
                 <div class="animate-naga flex flex-col items-center gap-2">
+                    <span class="angka-naga relative text-white text-m font-bold drop-shadow-md"></span>
                     <div class="w-60 h-6 bg-gray-800 border-2 border-black rounded-full overflow-hidden shadow-lg relative">
                         <div class="h-full bg-red-600 animate-hp-naga"></div>
                     </div>
-                    <img class="w-60 h-60" src="naga.png" alt="Naga">
+                    <div class="wrapper-getar-naga">
+                        <img class="w-60 h-60 animasi-kematian-naga" src="naga.png" alt="Naga">
+                    </div>
                 </div>
             </div>
         </div>
