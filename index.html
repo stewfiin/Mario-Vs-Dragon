@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @keyframes k-kanan {
+            0% { transform: translateX(0); opacity: 1; } 
+            90% { opacity: 1; }
+            100% { transform: translateX(calc(100vw - 150px)); opacity: 0; }
+        }
+        .animate-kanan {
+            animation: k-kanan 3s linear infinite;
+        }
+
+        @keyframes mario {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-200px); }
+        }
+        .animate-mario {
+            animation: mario 1s ease-in-out infinite;
+        }
+
+        @keyframes naga {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-100px); }
+        }
+        .animate-naga {
+            animation: naga 1s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes kurangi-hp {
+            0%, 24%  { width: 100%; } 
+            25%, 49% { width: 75%; }  
+            50%, 74% { width: 50%; }  
+            75%, 99% { width: 25%; }  
+            100%     { width: 0%; }  
+        }
+
+        .animate-hp-naga {
+            animation: kurangi-hp 12s steps(1) infinite;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="bg-[url('background.jpg')] bg-cover bg-bottom min-h-screen flex items-start justify-start p-10 overflow-hidden">  
+        <div class="flex flex-col w-full h-full justify-between">        
+            <div>
+                <div>
+                    <h1 class="text-3xl font-bold underline text-white drop-shadow-md">Mario VS Dragon</h1>
+                    <p class="text-lg text-white drop-shadow-md">Epic Battle Animation</p>
+                </div> 
+                <div>
+                     <img class="animate-kanan w-20 h-20 mt-10" src="api.png" alt="Api">
+                </div>
+            </div>
+
+            <div class="flex justify-between items-end w-full mt-20">          
+                <div class="animate-mario flex flex-col items-center gap-2">
+                    <div class="w-40 h-6 bg-gray-800 border-2 border-black rounded-full overflow-hidden shadow-lg relative">
+                        <div class="h-full w-full bg-green-500"></div> </div>
+                    <img class=" w-40 h-40" src="mario.png" alt="Mario">
+                </div>           
+                <div class="animate-naga flex flex-col items-center gap-2">
+                    <div class="w-60 h-6 bg-gray-800 border-2 border-black rounded-full overflow-hidden shadow-lg relative">
+                        <div class="h-full bg-red-600 animate-hp-naga"></div>
+                    </div>
+                    <img class="w-60 h-60" src="naga.png" alt="Naga">
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
